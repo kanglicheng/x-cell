@@ -16,10 +16,22 @@ class TableView {
 	initDomReference() {
 		this.headerRowEl = document.querySelector('THEAD TR');
 		this.sheetBodyEl = document.querySelector('TBODY');
+		this.formulaBarEl = document.querySelector('#formula-bar');
 	}
 
 	initCurrentCell() {
 		this.currentCellLocation = { col: 0, row: 0};
+		this.renderFormulaBar();
+	}
+
+	normalizeValueForRendering(value) {
+		return value || '';
+	}
+
+	renderFormulaBar() {
+		const currentCellValue = this.model.getValue(this.currentCellLocation);
+		this.formulaBarEl.value = this.normalizeValueForRendering(currentCellValue);
+		this.formulaBarEl.focus();
 	}
 
 	isCurrentCell(col, row) {
@@ -76,6 +88,7 @@ class TableView {
 			this.currentCellLocation = { col: col, row: row};
 			this.renderTableBody();
 		}
+		this.renderFormulaBar();
 	}
 
 }
