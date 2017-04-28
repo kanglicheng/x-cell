@@ -43,6 +43,7 @@ class TableView {
 	renderTable() {
 		this.renderTableHeader();
 		this.renderTableBody();
+		this.renderTableFooter();
 	}
 
 	renderTableHeader() {
@@ -70,6 +71,13 @@ class TableView {
 		}
 		removeChildren(this.sheetBodyEl);
 		this.sheetBodyEl.appendChild(fragment);
+	}
+
+	renderTableFooter() {
+		removeChildren(this.headerRowEl);
+		getLetterRange('A', this.model.numCols)
+		   .map(colLable => createTH(colLable))
+		   .forEach(th => this.headerRowEl.appendChild(th));
 	}
 
 	attachEventHandlers() {
