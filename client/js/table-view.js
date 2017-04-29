@@ -1,5 +1,6 @@
 const { getLetterRange } = require('./array-util');
 const { removeChildren, createTR, createTH, createTD} = require('./dom-util');
+const add = require('./adder.js');
 
 class TableView {
 	constructor(model) {
@@ -17,6 +18,7 @@ class TableView {
 		this.headerRowEl = document.querySelector('THEAD TR');
 		this.sheetBodyEl = document.querySelector('TBODY');
 		this.formulaBarEl = document.querySelector('#formula-bar');
+		this.footerRowEl = document.querySelector('TFOOT TR');
 	}
 
 	initCurrentCell() {
@@ -39,7 +41,6 @@ class TableView {
 		       this.currentCellLocation.row === row;
 	}
 
-
 	renderTable() {
 		this.renderTableHeader();
 		this.renderTableBody();
@@ -48,7 +49,7 @@ class TableView {
 
 	renderTableHeader() {
 		removeChildren(this.headerRowEl);
-		getLetterRange('A', this.model.numCols)
+		getLetterRange('A', this.model.numRows)
 		   .map(colLable => createTH(colLable))
 		   .forEach(th => this.headerRowEl.appendChild(th));
 	}
@@ -74,10 +75,14 @@ class TableView {
 	}
 
 	renderTableFooter() {
-		removeChildren(this.headerRowEl);
-		getLetterRange('A', this.model.numCols)
-		   .map(colLable => createTH(colLable))
-		   .forEach(th => this.headerRowEl.appendChild(th));
+		let i = 0;
+		while(i <= this.model.numRows) {
+			removeChildren(this.footerRowEl);
+			let sum = add(i, this.model.numCols)
+			   .map(colLable => createTH(colLable))
+			   .forEach(th => this.footerRowEl.appendChild(th));
+			i++;
+		}
 	}
 
 	attachEventHandlers() {
