@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": "6.10.2"
-  }
+  },
   "scripts": {
     "postinstall": "browserify client/js/app.js -o public/js/bundle.js",
     "build": "mkdir -p public/js; browserify client/js/app.js > public/js/bundle.js",
