@@ -77,7 +77,6 @@ class TableView {
 		let value = 0;
 		for(let i=1; i<this.model.numRows; i++){ 
 			let columnValue = document.getElementById("sheet-current").rows[i].cells[colIndex].textContent;
-			console.log(columnValue);
 			for(var x=0; x<columnValue.length; x++){
 				if(!isNaN(columnValue[x])){
 					value += parseInt(columnValue);
