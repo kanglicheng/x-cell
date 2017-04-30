@@ -16,6 +16,10 @@ class TableModel {
 	setValue(location, value) {
 		this.data[this._getCellId(location)] = value;
 	}
+
+	getNumRows() {
+		return numRows;
+	}
 }
 
 module.exports = TableModel;

@@ -73,32 +73,13 @@ class TableView {
 		this.sheetBodyEl.appendChild(fragment);
 	}
 
-	getValuesForColumn(colIndex) {
-		let value = 0;
-		for(let i=1; i<this.model.numRows; i++){ 
-			let columnValue = document.getElementById("sheet-current").rows[i].cells[colIndex].textContent;
-			console.log(columnValue);
-			for(var x=0; x<columnValue.length; x++){
-				if(!isNaN(columnValue[x])){
-					value += parseInt(columnValue);
-				}
-			}
-		}
-		return value;
-	}
 
 	renderTableFooter() {
-		let sum = [];
-		let i = 0;
-		while(i < this.model.numCols) {
-			sum[i] = this.getValuesForColumn(i);
-			i++;
-		}
 		removeChildren(this.footerRowEl);
-		sum.map(colLable => createTD(colLable))
-		   .forEach(td => this.footerRowEl.appendChild(td));
+		getLetterRange('A', this.model.numCols)
+		   .map(colLable => createTH(colLable))
+		   .forEach(th => this.headerRowEl.appendChild(th));
 	}
-
 
 	attachEventHandlers() {
 		this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this));
@@ -118,12 +99,12 @@ class TableView {
 		this.currentCellLocation = { col: col, row: row};
 		this.renderTableBody();
 		this.renderFormulaBar();
-		this.renderTableFooter();
 	}
 
 	handleFooterRowEl(evt) {
 		const value = this.footerRowEl.value;
 		this.model.setValue(this.currentCellLocation, value);
+
 	}
 
 }
