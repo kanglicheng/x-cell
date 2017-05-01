@@ -140,12 +140,14 @@ class TableView {
 		this.model.changeRows();
 		console.log(this.model.numRows);
 		this.renderTableBody();
+		this.renderTableFooter();
 	}
 
 	addCol(evt) {
 		this.model.changeCols();
 		this.renderTableBody();
 		this.renderTableHeader();
+		this.renderTableFooter();
 	}
 
 }
