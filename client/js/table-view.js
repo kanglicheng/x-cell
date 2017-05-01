@@ -1,5 +1,6 @@
 const { getLetterRange } = require('./array-util');
 const { removeChildren, createTR, createTH, createTD} = require('./dom-util');
+const { TableModel } = require('./table-model');
 
 class TableView {
 	constructor(model) {
@@ -11,6 +12,7 @@ class TableView {
 		this.initCurrentCell();
 		this.renderTable();
 		this.attachEventHandlers();
+		this.addButtonHandlers();
 	}
 
 	initDomReference() {
@@ -98,7 +100,6 @@ class TableView {
 		   .forEach(td => this.footerRowEl.appendChild(td));
 	}
 
-
 	attachEventHandlers() {
 		this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this));
 		this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
@@ -124,6 +125,27 @@ class TableView {
 	handleFooterRowEl(evt) {
 		const value = this.footerRowEl.value;
 		this.model.setValue(this.currentCellLocation, value);
+	}
+	
+	addButtonHandlers() {
+		let addRowEl = document.getElementById('add-row');
+		let addColEl = document.getElementById('add-col');
+
+		addRowEl.addEventListener('click', this.addRow.bind(this));
+		addColEl.addEventListener('click', this.addCol.bind(this));
+	}
+
+	addRow(evt) {
+		console.log('i hate this');
+		this.model.changeRows();
+		console.log(this.model.numRows);
+		this.renderTableBody();
+	}
+
+	addCol(evt) {
+		this.model.changeCols();
+		this.renderTableBody();
+		this.renderTableHeader();
 	}
 
 }

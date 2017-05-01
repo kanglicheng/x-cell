@@ -20,6 +20,14 @@ class TableModel {
 	getNumRows() {
 		return numRows;
 	}
+
+	changeRows() {
+		this.numRows++;
+	}
+
+	changeCols() {
+		this.numCols++;
+	}
 }
 
 module.exports = TableModel;
