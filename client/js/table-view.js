@@ -136,9 +136,7 @@ class TableView {
 	}
 
 	addRow(evt) {
-		console.log('i hate this');
 		this.model.changeRows();
-		console.log(this.model.numRows);
 		this.renderTableBody();
 		this.renderTableFooter();
 	}
