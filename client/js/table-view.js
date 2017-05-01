@@ -77,12 +77,10 @@ class TableView {
 
 	getValuesForColumn(colIndex) {
 		let value = 0;
-		for(let i=1; i<this.model.numRows; i++){ 
-			let columnValue = document.getElementById("sheet-current").rows[i].cells[colIndex].textContent;
-			for(var x=0; x<columnValue.length; x++){
-				if(!isNaN(columnValue[x])){
-					value += parseInt(columnValue[x]);
-				}
+		for(let i=1; i<this.model.numRows; i++){
+			let columnValue = parseInt(document.getElementById("sheet-current").rows[i].cells[colIndex].textContent);
+			if(!isNaN(columnValue)){
+				value += columnValue;
 			}
 		}
 		return value;
