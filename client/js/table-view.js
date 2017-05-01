@@ -81,7 +81,7 @@ class TableView {
 			let columnValue = document.getElementById("sheet-current").rows[i].cells[colIndex].textContent;
 			for(var x=0; x<columnValue.length; x++){
 				if(!isNaN(columnValue[x])){
-					value += parseInt(columnValue);
+					value += parseInt(columnValue[x]);
 				}
 			}
 		}
