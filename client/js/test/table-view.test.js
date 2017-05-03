@@ -115,4 +115,64 @@ describe('table-view', () => {
       expect(lableTexts).toEqual(['A', 'B', 'C', 'D', 'E', 'F'])
     });
   });
+
+  describe('table footer', () => {
+    it('adds column values to get sum for footer', () => {
+      // set up the initial state
+      const columnValues = [1,2,3,4,5,6,7];
+      const model = new TableModel(1,8);
+      const view = new TableView(model);
+      view.init();
+      for (var i = 1; i < 8; i++) {
+        document.getElementById("sheet-current").rows[i].cells[0].textContent = columnValues[i-1];
+      }
+
+      // inspect the initial state
+      view.renderTableFooter();
+      let trs = parseInt(document.querySelectorAll('TFOOT TD')[0].textContent);
+      expect(trs).toBe(28);
+    });
+  });
+
+  describe('add row button', () => {
+    it('adds a row when button is clicked', () => {
+      // set up the initial state
+      const model = new TableModel(3,3);
+      const view = new TableView(model);
+      view.init();
+
+      // inspect the initial state
+      var ths = document.querySelectorAll("TBODY TR").length;
+      expect(ths).toBe(3);
+
+      // simulate user action
+      let td = document.getElementById("add-row");
+      td.click();
+      
+      // inspect the resulting state
+      ths = document.querySelectorAll("TBODY TR").length;
+      expect(ths).toBe(4);
+    });
+  });
+
+  describe('add column button', () => {
+    it('adds a column when button is clicked', () => {
+      // set up the initial state
+      const model = new TableModel(3,3);
+      const view = new TableView(model);
+      view.init();
+
+      // inspect the initial state
+      var ths = document.querySelectorAll("TBODY TD").length/document.querySelectorAll("TBODY TR").length;
+      expect(ths).toBe(3);
+
+      // simulate user action
+      let td = document.getElementById("add-col");
+      td.click();
+      
+      // inspect the resulting state
+      ths = document.querySelectorAll("TBODY TD").length/document.querySelectorAll("TBODY TR").length;
+      expect(ths).toBe(4);
+    });
+  });
 });
