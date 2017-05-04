@@ -123,7 +123,9 @@ describe('table-view', () => {
       const model = new TableModel(1,8);
       const view = new TableView(model);
       view.init();
-      for (var i = 1; i < 8; i++) {
+
+
+      for (var i = 1; i < columnValues.length+1; i++) {
         document.getElementById("sheet-current").rows[i].cells[0].textContent = columnValues[i-1];
       }
 
