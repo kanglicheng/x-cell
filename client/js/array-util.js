@@ -4,13 +4,13 @@ const getRange = function(fromNum, toNum) {
 };
 
 const getLetterRange = function(firstLetter = 'A', numLetters) {
-	const rangeStart = firstLetter.charCodeAt(0);
-	const rangeEnd = rangeStart + numLetters - 1;
-	return getRange(rangeStart, rangeEnd)
-	  .map(charCode => String.fromCharCode(charCode));
+  const rangeStart = firstLetter.charCodeAt(0);
+  const rangeEnd = rangeStart + numLetters - 1;
+  return getRange(rangeStart, rangeEnd)
+    .map(charCode => String.fromCharCode(charCode));
 };
 
 module.exports = {
-	getRange: getRange,
-	getLetterRange: getLetterRange
+  getRange: getRange,
+  getLetterRange: getLetterRange
 };
